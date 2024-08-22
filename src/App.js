@@ -55,11 +55,29 @@ const App = () => {
       setCurrentNumber('0')
       setOperation('/')
     }else {
-      const division = Number(firstNumber) / Number(currentNumber);
-      setCurrentNumber(String(division))
+      const sum = Number(firstNumber) / Number(currentNumber);
+      setCurrentNumber(String(sum))
       setOperation('')
     }
   }
+
+  const handleMultiplyNumbers = () =>{
+    if(firstNumber === '0'){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0')
+      setOperation('x')
+    }else {
+      const sum = Number(firstNumber) * Number(currentNumber);
+      setCurrentNumber(String(sum))
+      setOperation('')
+    }
+  }
+
+  const handlePointNumbers = () => {
+    if (!currentNumber.includes('.')) {
+      setCurrentNumber(prev => `${prev}.`);
+    }
+  };
 
   
 
@@ -76,6 +94,9 @@ const App = () => {
           case '/':
             handleDivisionNumbers();
             break;
+          case 'x':
+            handleMultiplyNumbers();
+            break;
           default: 
             break;
         }
@@ -88,10 +109,10 @@ const App = () => {
       <Content>
         <Input value={currentNumber}/>
         <Row>
-          <Button label="x"/>
+          <Button label="x" onClick={handleMultiplyNumbers}/>
           <Button label="/" onClick={handleDivisionNumbers}/>
           <Button label="c" onClick={handleOnClear}/>
-          <Button label="."/>
+          <Button label="." onClick={handlePointNumbers}/>
         </Row>
         <Row>
           <Button label="7" onClick={() => handleAddNumber('7')}/>
